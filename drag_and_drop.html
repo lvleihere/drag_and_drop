@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>drap and drog</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+    #div1 {
+        float: left;
+        width: 100px;
+        height: 65px;
+        margin: 10px;
+        border: 1px solid red;
+    }
+    
+    #div2 {
+        float: left;
+        width: 200px;
+        height: 135px;
+        margin: 10px;
+        border: 1px solid blue;
+    }
+    </style>
+    <script type="text/javascript">
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    var srcdiv = null;
+
+    function drag(ev, divdom) {
+        srcdiv = divdom;
+        ev.dataTransfer.setData("text/html", divdom.innerHTML);
+    }
+
+    function drop(ev, divdom) {
+        ev.preventDefault();
+        if (srcdiv != divdom) {
+            srcdiv.innerHTML = divdom.innerHTML;
+            divdom.innerHTML = ev.dataTransfer.getData("text/html");
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div id="div1" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">
+        <p>我是前面的吕雷</p>
+    </div>
+    <div id="div2" ondrop="drop(event,this)" ondragover="allowDrop(event)" draggable="true" ondragstart="drag(event, this)">
+        <p>我是后面的吕雷</p>
+    </div>
+</body>
+
+</html>
